@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Crunchomics’ Documentation &#8212; Crunchomics 0.01 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. Log in on the Head Node" href="intro_crunchomics.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="intro_crunchomics.html" title="1. Log in on the Head Node"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Crunchomics 0.01 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><em>The Crunchomics’ Documentation</em></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-crunchomics-documentation">
+<h1><em>The Crunchomics’ Documentation</em><a class="headerlink" href="#the-crunchomics-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="crunchomics-the-genomics-compute-environment-for-sils-and-ibed">
+<h2><em>Crunchomics: The Genomics Compute Environment for SILS and IBED</em><a class="headerlink" href="#crunchomics-the-genomics-compute-environment-for-sils-and-ibed" title="Permalink to this headline">¶</a></h2>
+<p>Cruchomics has 1 application server, a web server, a head node and 5 compute nodes. A storage system is mounted in which all users have a fast 25 GB SSD home directory and a 500 GB home directory. Volumes from the faculty server can be mounted on the system.</p>
+<ul class="simple">
+<li><p>CPU: AMD EPYC Rome 7302 32 cores, 64 threads, 3GHz</p></li>
+<li><p>Compute cluster: 160 cores, 320 threads</p></li>
+<li><p>Infiniband internal connection</p></li>
+<li><dl class="simple">
+<dt>Local storage compute cluster: 8TB (SSD/NVMe): /scratch</dt><dd><ul>
+<li><p>/scratch is emptied after month of inactivity</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Memory:</dt><dd><ul>
+<li><p>Web server: 256 GB</p></li>
+<li><p>Application server: 1024 GB</p></li>
+<li><p>Head node and compute nodes: 512 GB</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Storage: gross 504 TB operated in RAID-Z2: net approx. 220 TB.</dt><dd><ul>
+<li><p>If one disk fails: no data loss</p></li>
+<li><p>Snapshots taken: some protection against unintentional file deletions</p></li>
+<li><p>No backups made!</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>File systems are mounted on all nodes.</p></li>
+<li><p>OS: CentOS 7</p></li>
+<li><p>Help: <a class="reference external" href="mailto:w&#46;c&#46;deleeuw&#37;&#52;&#48;uva&#46;nl">w<span>&#46;</span>c<span>&#46;</span>deleeuw<span>&#64;</span>uva<span>&#46;</span>nl</a> / <a class="reference external" href="mailto:j&#46;rauwerda&#37;&#52;&#48;uva&#46;nl">j<span>&#46;</span>rauwerda<span>&#64;</span>uva<span>&#46;</span>nl</a></p></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/architecture.PNG"><img alt="_images/architecture.PNG" src="_images/architecture.PNG" style="width: 700px; height: 300px;" /></a>
+</div>
+<div class="toctree-wrapper compound">
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Crunchomics’ Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_crunchomics.html">1. Log in on the Head Node</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro_crunchomics.html#on-windows">1.1. On Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="intro_crunchomics.html#login-without-a-password-with-rsa-keys">1.1.1. Login Without a Password with RSA Keys</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="intro_crunchomics.html#on-linux-and-mac">1.2. On Linux and Mac</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="intro_crunchomics.html#id1">1.2.1. Login Without a Password with RSA Keys</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro_crunchomics.html#preparing-your-account">2. Preparing Your Account</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro_crunchomics.html#getting-your-environment-ready">2.1. Getting Your Environment Ready</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="intro_crunchomics.html#diy">2.1.1. DIY</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro_crunchomics.html#account">3. Account</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_crunchomics.html#the-crunchomics-application-server">4. The Crunchomics Application Server</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro_crunchomics.html#clc-genomics-workbench">4.1. CLC Genomics Workbench</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_crunchomics.html#start-rstudio">4.2. Start RStudio</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro_crunchomics.html#the-crunchomics-compute-cluster">5. The Crunchomics Compute Cluster</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro_crunchomics.html#interactive-access">5.1. Interactive access</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="intro_crunchomics.html#example-of-interactive-r-sessions">5.1.1. Example of Interactive R Sessions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="miniconda.html">6. Miniconda</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="miniconda.html#installation">6.1. Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="miniconda.html#get-miniconda">6.1.1. Get miniconda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="miniconda.html#install-miniconda">6.1.2. Install Miniconda</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="miniconda.html#installation-of-a-conda-package">6.2. Installation of a Conda Package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="miniconda.html#example-using-conda-installation-of-flye">6.2.1. Example: Using Conda Installation of Flye</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="slurm_overview.html">7. Slurm Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="slurm_overview.html#additional-help-and-information">7.1. Additional help and information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm_overview.html#quick-slurm-demo">7.2. Quick slurm demo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slurm_overview.html#information-about-the-cluster">7.2.1. Information about the cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slurm_overview.html#multithreading">7.2.2. Multithreading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slurm_overview.html#srun">7.2.3. srun</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slurm_overview.html#salloc">7.2.4. salloc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slurm_overview.html#sbatch">7.2.5. sbatch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slurm_overview.html#scancel">7.2.6. scancel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="slurm_jobs.html">8. Slurm Jobs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="slurm_jobs.html#jobs-and-job-steps">8.1. Jobs and Job Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm_jobs.html#batch-jobs-sbatch">8.2. Batch jobs: sbatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slurm_jobs.html#parallel-jobs">8.3. Parallel Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slurm_jobs.html#multithreaded-bowtie2-example">8.3.1. Multithreaded bowtie2 Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slurm_jobs.html#multithreaded-example-in-c">8.4. Multithreaded Example in C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slurm_jobs.html#job-arrays-parallel-example-with-rscript">8.4.1. Job Arrays: Parallel example with Rscript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slurm_jobs.html#use-conda-environments-on-the-compute-nodes">8.4.2. Use Conda Environments on the Compute Nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slurm_jobs.html#interactive-shells-continued">8.5. Interactive Shells Continued</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slurm_jobs.html#example-using-an-interactive-shell">8.5.1. Example using an interactive shell</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="slurm_indirect.html">9. Using Slurm Indirectly</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="slurm_indirect.html#id1">9.1. Using Slurm indirectly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="slurm_indirect.html#slurm-in-r">9.1.1. Slurm in R</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slurm_indirect.html#slurm-in-python">9.1.2. Slurm in Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slurm_indirect.html#slurm-and-snakemake">9.1.3. Slurm and Snakemake</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="slurm_indirect.html#debugging-slurm-jobs">10. Debugging Slurm jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nvme_clusters.html">11. Use of Local NVMe Storage on Compute Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="containers.html">12. Docker / Singularity Containers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="containers.html#singularity-hub">12.1. Singularity Hub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="containers.html#docker-hub">12.2. Docker Hub</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><em>The Crunchomics’ Documentation</em></a><ul>
+<li><a class="reference internal" href="#crunchomics-the-genomics-compute-environment-for-sils-and-ibed"><em>Crunchomics: The Genomics Compute Environment for SILS and IBED</em></a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intro_crunchomics.html"
+                        title="next chapter"><span class="section-number">1. </span>Log in on the Head Node</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="intro_crunchomics.html" title="1. Log in on the Head Node"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Crunchomics 0.01 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><em>The Crunchomics’ Documentation</em></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Han Rauwerda Wim de Leeuw SILS-MAD-RB&amp;AB.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

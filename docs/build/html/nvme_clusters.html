@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11. Use of Local NVMe Storage on Compute Nodes &#8212; Crunchomics 0.01 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="12. Docker / Singularity Containers" href="containers.html" />
+    <link rel="prev" title="9. Using Slurm Indirectly" href="slurm_indirect.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="containers.html" title="12. Docker / Singularity Containers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="slurm_indirect.html" title="9. Using Slurm Indirectly"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Crunchomics 0.01 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">11. </span>Use of Local NVMe Storage on Compute Nodes</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="use-of-local-nvme-storage-on-compute-nodes">
+<h1><span class="section-number">11. </span>Use of Local NVMe Storage on Compute Nodes<a class="headerlink" href="#use-of-local-nvme-storage-on-compute-nodes" title="Permalink to this headline">¶</a></h1>
+<p>Each compute node in the cluster has 7.3TB local and very fast NVMe storage available in /scratch. By storing temporary and/or much accessed data on the scratch disk, file access times can be improved significantly. It also reduces the load on the filer which will benefit all users.  However as local storage it can be only accessed on a particular node. So either data has to be synchronized over all nodes, or jobs have to be fixed on particular nodes using the <code class="docutils literal notranslate"><span class="pre">-w</span> <span class="pre">flag</span></code></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>You might remember that in the <em>Multithreaded bowtie2 example</em> we used the local /scratch disk to copy the genome index and the fastq files to. The alignment job was calculated (in this particular case on cn001).</dt><dd><ul>
+<li><p>These files are <strong>not</strong> automatically removed when the job has finished. So multiple jobs can access and further process data in scratch.</p></li>
+<li><p>To prevent /scratch from filling up, files which have not been accessed (read or written) for (currently) a month are removed. The time unused files are removed might be reduced if the file system fills up too quickely.</p></li>
+<li><p>This policy makes it possible to reuse large files on the local /scratch disk on a compute node. For instance, look at the scratch of cn001:</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun -n1 -w omics-cn001 ls -lh /scratch
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/slurm8.png"><img alt="_images/slurm8.png" src="_images/slurm8.png" style="width: 480px; height: 120px;" /></a>
+</div>
+<ul class="simple">
+<li><p>Here we make use of the genome index on cn001 while doing an alignment with 2 new files (save the file below as align_Mycoplasma3.sh):</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#</span>
+<span class="c1">#SBATCH --job-name=align_Mycoplasma</span>
+<span class="c1">#SBATCH --output=res_alignjob.txt</span>
+<span class="c1">#</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --cpus-per-task=8</span>
+<span class="c1">#SBATCH --time=10:00</span>
+<span class="c1">#SBATCH --mem-per-cpu=2000</span>
+<span class="c1">#</span>
+<span class="nv">WD</span><span class="o">=</span><span class="s2">&quot;/scratch/</span><span class="nv">$USER</span><span class="s2">&quot;</span>
+mkdir -p <span class="nv">$WD</span>
+<span class="nb">cd</span> <span class="nv">$WD</span>
+<span class="c1">#</span>
+<span class="c1">#test if the Mycoplasma genome is already there, download it and build the index if not.</span>
+<span class="nv">fl</span><span class="o">=</span><span class="s2">&quot;GCF_000027325.1_ASM2732v1_genomic.fna.gz&quot;</span>
+<span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&quot;</span><span class="si">${</span><span class="nv">fl</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        srun wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/027/325/GCF_000027325.1_ASM2732v1/GCF_000027325.1_ASM2732v1_genomic.fna.gz -P ./
+        srun bowtie2-build GCF_000027325.1_ASM2732v1_genomic.fna.gz MG37
+<span class="k">fi</span>
+<span class="c1">#</span>
+<span class="c1">#only download the 2 illumina files if they are not there</span>
+<span class="nv">fl</span><span class="o">=</span><span class="s2">&quot;ERR486828_1.fastq.gz&quot;</span>
+<span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&quot;</span><span class="si">${</span><span class="nv">fl</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        srun wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR486/ERR486828/ERR486828_1.fastq.gz -P ./
+<span class="k">fi</span>
+<span class="c1">#</span>
+<span class="nv">fl</span><span class="o">=</span><span class="s2">&quot;ERR486828_2.fastq.gz&quot;</span>
+<span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&quot;</span><span class="si">${</span><span class="nv">fl</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        srun wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR486/ERR486828/ERR486828_2.fastq.gz -P ./
+<span class="k">fi</span>
+<span class="c1">#</span>
+date
+srun bowtie2 -x MG37 -1 ERR486828_1.fastq.gz -2 ERR486828_2.fastq.gz --very-fast -p <span class="nv">$SLURM_CPUS_PER_TASK</span> -S /zfs/omics/personal/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/result_ERR486828.sam
+date
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>execute with <code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">-w</span> <span class="pre">omics-cn001</span> <span class="pre">align_Mycoplasma3.sh</span></code></p></li>
+<li><p>from <code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-n21</span> <span class="pre">res_alignjob.txt</span></code>:</p></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/slurm9.png"><img alt="_images/slurm9.png" src="_images/slurm9.png" style="width: 440px; height: 260px;" /></a>
+</div>
+<ul class="simple">
+<li><p>I conclude the script succeeded.</p></li>
+<li><p>look at the /scratch directory:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun -n1 -w omics-cn001 ls -lh /scratch
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/slurm10.png"><img alt="_images/slurm10.png" src="_images/slurm10.png" style="width: 630px; height: 150px;" /></a>
+</div>
+<ul class="simple">
+<li><p>Indeed, the index MG37 is reused (timestamp 12:00) and the two fastq files ending on 28 are newly downloaded (timestamp 18:07).</p></li>
+<li><p>Obviously, this way of working is especially useful if there is a lot of IO. The size of the local scratch is net 7.3 TB.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun -n1 -w omics-cn001 df -h /scratch
+</pre></div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="slurm_indirect.html"
+                        title="previous chapter"><span class="section-number">9. </span>Using Slurm Indirectly</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="containers.html"
+                        title="next chapter"><span class="section-number">12. </span>Docker / Singularity Containers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/nvme_clusters.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="containers.html" title="12. Docker / Singularity Containers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="slurm_indirect.html" title="9. Using Slurm Indirectly"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Crunchomics 0.01 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">11. </span>Use of Local NVMe Storage on Compute Nodes</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Han Rauwerda Wim de Leeuw SILS-MAD-RB&amp;AB.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
