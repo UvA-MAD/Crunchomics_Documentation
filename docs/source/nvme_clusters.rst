@@ -6,7 +6,7 @@ Each compute node in the cluster has 7.3TB local and very fast NVMe storage avai
 *  You might remember that in the *Multithreaded bowtie2 example* we used the local /scratch disk to copy the genome index and the fastq files to. The alignment job was calculated (in this particular case on cn001).
     *  These files are **not** automatically removed when the job has finished. So multiple jobs can access and further process data in scratch. 
     * To prevent /scratch from filling up, files which have not been accessed (read or written) for (currently) a month are removed. The time unused files are removed might be reduced if the file system fills up too quickely. 
-    *  This policy makes it possible to reuse large files on the local /scratch disk on a compute node. For instance, look at the scratch of cn001:
+    *  This policy makes it possible to reuse large files on the local /scratch disk on a compute node. For instance, look at the scratch of cn001 (this might look differently when you read this):
 
 .. code-block:: bash
 
