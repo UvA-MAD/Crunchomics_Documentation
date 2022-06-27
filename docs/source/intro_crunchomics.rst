@@ -164,7 +164,7 @@ Start RStudio
 *************
 
 *  We are currently setting up a log in to RStudio with your uvanetid via Surfconnect. This Surfconnect access is not available yet. Until then you can login directly on the application server.
-    *  Login to RStudio on the application server with your UvAnetid and password at: `http://omics-app01.science.uva.nl:8787/`. Don't forget to include the port number (8787) in your url.
+    *  Login to RStudio on the application server with your UvAnetid and password at: `http://omics-app01.science.uva.nl/`. 
 
 The Crunchomics Compute Cluster
 ##########################################
