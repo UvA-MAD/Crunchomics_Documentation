@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6. Miniconda &#8212; Crunchomics 0.01 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Slurm Overview" href="slurm_overview.html" />
+    <link rel="prev" title="1. Log in on the Head Node" href="intro_crunchomics.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="slurm_overview.html" title="7. Slurm Overview"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro_crunchomics.html" title="1. Log in on the Head Node"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Crunchomics 0.01 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6. </span>Miniconda</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="miniconda">
+<h1><span class="section-number">6. </span>Miniconda<a class="headerlink" href="#miniconda" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Conda is an open source package management system and environment management system. Conda allows you find and install packages in your own environment. You don’t need administrator privileges.</p></li>
+<li><p>If you need a package that requires a different version of Python, you use conda as an environment manager. With just a few commands, you can set up a totally separate environment to run that different version of Python, while continuing to run your usual version of Python in your normal environment.</p></li>
+</ul>
+<div class="section" id="installation">
+<h2><span class="section-number">6.1. </span>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>basic install is 89M</p></li>
+<li><p>other packages will require additional space, so rather install it in <code class="docutils literal notranslate"><span class="pre">/zfs/omics/personal/&lt;uvanetid1&gt;</span></code> than in your <code class="docutils literal notranslate"><span class="pre">/home/&lt;uvanetid1&gt;</span></code></p></li>
+</ul>
+<div class="section" id="get-miniconda">
+<h3><span class="section-number">6.1.1. </span>Get miniconda<a class="headerlink" href="#get-miniconda" title="Permalink to this headline">¶</a></h3>
+<p>Download it</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /zfs/omics/personal/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-miniconda">
+<h3><span class="section-number">6.1.2. </span>Install Miniconda<a class="headerlink" href="#install-miniconda" title="Permalink to this headline">¶</a></h3>
+<p>Run the install script (as you)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash Miniconda3-latest-Linux-x86_64.sh
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Read the license information and answer yes….. After you answered yes, you will see a message like:</p></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/conda1.png"><img alt="_images/conda1.png" src="_images/conda1.png" style="width: 500px; height: 120px;" /></a>
+</div>
+<ul class="simple">
+<li><p>Specify here <code class="docutils literal notranslate"><span class="pre">/zfs/omics/personal/${USER}/miniconda3</span></code> (or replace <code class="docutils literal notranslate"><span class="pre">\${USER}</span></code> with your uvanetid).</p></li>
+<li><p>When the installation has finished you are asked if you want to initialize conda. Answer <em>yes</em>:</p></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/conda2.png"><img alt="_images/conda2.png" src="_images/conda2.png" style="width: 400px; height: 120px;" /></a>
+</div>
+<ul class="simple">
+<li><p>This finishes the installation:</p></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/conda3.png"><img alt="_images/conda3.png" src="_images/conda3.png" style="width: 600px; height: 140px;" /></a>
+</div>
+<ul class="simple">
+<li><p>After the installation, to have a shell with conda, leave your current one and start a new one or type:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> ~/.bashrc
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>After you have done this, you will see <em>(base)</em> as a prefix in your shell prompt.</p></li>
+<li><p>So, each time you start a shell, conda will be activated, if you don’t want that, type:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --set auto_activate_base fals
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>How much space does miniconda3 take?</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /zfs/personal/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/
+du -hs miniconda3/
+<span class="c1">#437M    miniconda3/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="installation-of-a-conda-package">
+<h2><span class="section-number">6.2. </span>Installation of a Conda Package<a class="headerlink" href="#installation-of-a-conda-package" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Suppose, you want to make a bacterial assembly with flye. With <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">flye</span></code> you discover that flye is not installed on Crunchomics. Of course, you can ask the maintainers of Crunchomics to install flye. But you also could install flye as a conda package. You go to <a class="reference external" href="https://anaconda.org/">https://anaconda.org/</a> and search for <em>flye</em></p></li>
+<li><p>There is a conda package available:</p></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/conda4.png"><img alt="_images/conda4.png" src="_images/conda4.png" style="width: 600px; height: 300px;" /></a>
+</div>
+<ul class="simple">
+<li><p>When you click on flye you get a link with installation details:</p></li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/conda5.png"><img alt="_images/conda5.png" src="_images/conda5.png" style="width: 600px; height: 500px;" /></a>
+</div>
+<ul class="simple">
+<li><p>Suppose you don’t want flye in your base environment. Therefore, you create a new environment that you call nptools. Install flye in the nptools evironment, deactivate base and activate nptools:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which flye  <span class="c1">#indeed, no flye</span>
+conda create -n nptools
+conda install -n nptools -c bioconda flye
+conda deactivate
+conda activate nptools
+flye -h
+<span class="c1">#usage: flye (--pacbio-raw | --pacbio-corr | --pacbio-hifi | --nano-raw |</span>
+<span class="c1">#             --nano-corr | --subassemblies) file1 [file_2 ...]</span>
+<span class="c1">#             --genome-size SIZE --out-dir PATH</span>
+conda env list
+conda deactivate
+flye
+<span class="c1">#bash: flye: command not found</span>
+<span class="c1">#</span>
+du -hs /zfs/personal/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/miniconda3/
+<span class="c1">#820M    miniconda3/</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Look what is in your environment with:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda list -n nptools
+conda list -n base
+</pre></div>
+</div>
+<div class="section" id="example-using-conda-installation-of-flye">
+<h3><span class="section-number">6.2.1. </span>Example: Using Conda Installation of Flye<a class="headerlink" href="#example-using-conda-installation-of-flye" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda deactivate
+conda activate nptools
+<span class="nb">cd</span> /zfs/omics/personal/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/
+mkdir -p ecoli
+<span class="nb">cd</span> ecoli
+wget https://zenodo.org/record/1172816/files/Loman_E.coli_MAP006-1_2D_50x.fasta
+date
+flye --nano-raw Loman_E.coli_MAP006-1_2D_50x.fasta --out-dir . --threads <span class="m">4</span>
+date
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6. Miniconda</a><ul>
+<li><a class="reference internal" href="#installation">6.1. Installation</a><ul>
+<li><a class="reference internal" href="#get-miniconda">6.1.1. Get miniconda</a></li>
+<li><a class="reference internal" href="#install-miniconda">6.1.2. Install Miniconda</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation-of-a-conda-package">6.2. Installation of a Conda Package</a><ul>
+<li><a class="reference internal" href="#example-using-conda-installation-of-flye">6.2.1. Example: Using Conda Installation of Flye</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro_crunchomics.html"
+                        title="previous chapter"><span class="section-number">1. </span>Log in on the Head Node</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="slurm_overview.html"
+                        title="next chapter"><span class="section-number">7. </span>Slurm Overview</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/miniconda.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="slurm_overview.html" title="7. Slurm Overview"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro_crunchomics.html" title="1. Log in on the Head Node"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Crunchomics 0.01 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6. </span>Miniconda</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Han Rauwerda Wim de Leeuw SILS-MAD-RB&amp;AB.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

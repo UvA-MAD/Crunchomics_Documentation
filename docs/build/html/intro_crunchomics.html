@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Log in on the Head Node &#8212; Crunchomics 0.01 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Miniconda" href="miniconda.html" />
+    <link rel="prev" title="The Crunchomics’ Documentation" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="miniconda.html" title="6. Miniconda"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="The Crunchomics’ Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Crunchomics 0.01 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>Log in on the Head Node</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="log-in-on-the-head-node">
+<h1><span class="section-number">1. </span>Log in on the Head Node<a class="headerlink" href="#log-in-on-the-head-node" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Remark: if you are outside UvA, use VPN.</p></li>
+<li><dl class="simple">
+<dt>from your local (desktop or laptop) machine</dt><dd><ul>
+<li><p>start puTTY or mobyxterm (windows)</p></li>
+<li><p>start terminal program (mac)</p></li>
+<li><p>start xterm or konsole (linux)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="on-windows">
+<h2><span class="section-number">1.1. </span>On Windows<a class="headerlink" href="#on-windows" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Connect via <a class="reference external" href="https://mobaxterm.mobatek.net/?gclid=CjwKCAiAkan9BRAqEiwAP9X6UaGJEwztxdR2mR-EKW5C7hyQPHwVvA3ypPrKCqQQEONI6LBwS6WsrRoC2a8QAvD_BwE/">MobaXterm</a> (includes X11 graphical output) or <a class="reference external" href="https://www.putty.org/">PuTTY</a>.</p></li>
+<li><p>MobaXterm facilitates to remember passwords.</p></li>
+<li><dl>
+<dt>Via MobaXterm interface (address is omics-h0.science.uva.nl):</dt><dd><div class="figure align-center">
+<a class="reference internal image-reference" href="_images/inlog.png"><img alt="_images/inlog.png" src="_images/inlog.png" style="width: 500px; height: 350px;" /></a>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="login-without-a-password-with-rsa-keys">
+<h3><span class="section-number">1.1.1. </span>Login Without a Password with RSA Keys<a class="headerlink" href="#login-without-a-password-with-rsa-keys" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>An explanation on how to use SSH keys (existing ones or newly generated) can be found here: <a class="reference external" href="https://devops.ionos.com/tutorials/use-ssh-keys-with-putty-on-windows/">SSH keys with PuTTY</a></p></li>
+<li><dl>
+<dt>If you don’t want to use the <em>Remember Password</em> mechanism in MobaXterm but still do not want to supply your password each time you login, you can configure MobaXterm also for use of SSH keys.</dt><dd><ul>
+<li><p>Start a local terminal with MobaXterm and type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">[</span>  <span class="o">-</span><span class="n">f</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span> <span class="p">]</span> <span class="p">;</span>
+        <span class="n">then</span>  <span class="n">echo</span> <span class="s2">&quot;Public key found.&quot;</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">rsa</span> <span class="p">;</span>
+<span class="n">fi</span>
+</pre></div>
+</div>
+</li>
+<li><p>Type enter 3 times unless you want to use a passfrase for the key. Copy de public part key to the file .ssh/authorized_keys on omics-h0. Here you have to type the password a last time. In your local terminal type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span>  <span class="o">|</span> \
+<span class="n">ssh</span> <span class="n">uvanetid1</span><span class="nd">@omics</span><span class="o">-</span><span class="n">h0</span><span class="o">.</span><span class="n">science</span><span class="o">.</span><span class="n">uva</span><span class="o">.</span><span class="n">nl</span> \
+<span class="s1">&#39;mkdir -p .ssh &amp;&amp; cat &gt;&gt; .ssh/authorized_keys&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>You can use the ssh key pair in MobaXterm by giving the location of the private key (it is in your local ‘persistent’ home directory, normally but depending on your windows version C:\Users\&lt;YOUR_WINDOWS_LOGIN_NAME&gt;\DOCUMENTS\MobaXterm\home\.ssh)</p></li>
+<li><div class="align-center figure">
+<a class="reference internal image-reference" href="_images/inlog2.png"><img alt="inlog splash 2 mobaxterm" src="_images/inlog2.png" style="width: 500px; height: 350px;" /></a>
+</div>
+</li>
+<li><p>Or: use the key generator mechanism in MobaXterm</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="on-linux-and-mac">
+<h2><span class="section-number">1.2. </span>On Linux and Mac<a class="headerlink" href="#on-linux-and-mac" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Via a terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#replace uvanetid1 with your uvanetid:</span>
+<span class="n">ssh</span> <span class="o">-</span><span class="n">X</span> <span class="n">uvanetid1</span><span class="nd">@omics</span><span class="o">-</span><span class="n">h0</span><span class="o">.</span><span class="n">science</span><span class="o">.</span><span class="n">uva</span><span class="o">.</span><span class="n">nl</span>
+<span class="c1"># -X for X11 graphical output</span>
+<span class="n">xclock</span>
+<span class="c1"># if you see a clock xwindows works</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="section" id="id1">
+<h3><span class="section-number">1.2.1. </span>Login Without a Password with RSA Keys<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Login using rsa keys: on the local system generate key if it doesn’t exist:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">[</span>  <span class="o">-</span><span class="n">f</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span> <span class="p">]</span> <span class="p">;</span> \
+        <span class="n">then</span>  <span class="n">echo</span> <span class="s2">&quot;Public key found.&quot;</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">rsa</span> <span class="p">;</span>
+<span class="n">fi</span>
+</pre></div>
+</div>
+</li>
+<li><p>Type enter 3 times unless you want to use a passfrase for the key. Copy de public part key to the file .ssh/aurhorized_keys on omics-h0. Here you have to type the password a last time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span><span class="o">.</span><span class="n">pub</span>  <span class="o">|</span> \
+<span class="n">ssh</span> <span class="n">uvanetid1</span><span class="nd">@omics</span><span class="o">-</span><span class="n">h0</span><span class="o">.</span><span class="n">science</span><span class="o">.</span><span class="n">uva</span><span class="o">.</span><span class="n">nl</span> \
+<span class="s1">&#39;mkdir -p .ssh &amp;&amp; cat &gt;&gt; .ssh/authorized_keys&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Test if it works. Now you should be logged without being asked a password:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">uvanetid1</span><span class="nd">@omics</span><span class="o">-</span><span class="n">h0</span><span class="o">.</span><span class="n">science</span><span class="o">.</span><span class="n">uva</span><span class="o">.</span><span class="n">nl</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="preparing-your-account">
+<h1><span class="section-number">2. </span>Preparing Your Account<a class="headerlink" href="#preparing-your-account" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="getting-your-environment-ready">
+<h2><span class="section-number">2.1. </span>Getting Your Environment Ready<a class="headerlink" href="#getting-your-environment-ready" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>You want to:</dt><dd><ul>
+<li><p>use system wide installed software: <code class="docutils literal notranslate"><span class="pre">/zfs/omics/software/bin</span></code> is added to your path</p></li>
+<li><p>have a python3 environment available + (genomics) specific packages such as <em>pandas</em> and <em>snakemake</em> installed: <code class="docutils literal notranslate"><span class="pre">madpy3</span></code> can be used as a command to activate the madpy3 environment</p></li>
+<li><p>have a more informative prompt</p></li>
+<li><p>have, in your ultrafast home directory a link to your 500 GB <em>personal</em> directory on the file storage.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>A script to do the things mentioned above for you is here, type on your head node shell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">zfs</span><span class="o">/</span><span class="n">omics</span><span class="o">/</span><span class="n">software</span><span class="o">/</span><span class="n">script</span><span class="o">/</span><span class="n">omics_install_script</span>
+</pre></div>
+</div>
+<p>This script will change the .bashrc and .bash_profile files such that the requirements mentioned above are fullfilled.</p>
+<div class="section" id="diy">
+<h3><span class="section-number">2.1.1. </span>DIY<a class="headerlink" href="#diy" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>If you want to make the adaptations yourself, here are some ideas:</p></li>
+<li><p>Create a shortcut (softlink) in your home directory (25GB) to your personal directory (500 GB):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ln -s /zfs/omics/personal/$USER ~/personal
+</pre></div>
+</div>
+</li>
+<li><p>Update the PATH variable in your <em>.bashrc</em> file so you can use the software installed in <code class="docutils literal notranslate"><span class="pre">/zfs/omics/software</span></code>. This is software not installed by the package manager, such as R, bowtie2, samtools etc.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PATH=${PATH}:/zfs/omics/software/bin
+</pre></div>
+</div>
+</li>
+<li><p>Some tools, such as snakemake, htseq, etc. need python3 and can be executed in a python virtual environment.</p></li>
+<li><p>Activate the virtual environment as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">which</span> <span class="n">snakemake</span>
+<span class="c1">#which: no snakemake</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">zfs</span><span class="o">/</span><span class="n">omics</span><span class="o">/</span><span class="n">software</span><span class="o">/</span><span class="n">v_envs</span><span class="o">/</span><span class="n">madpy3</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">which</span> <span class="n">snakemake</span>
+<span class="c1">#/zfs/omics/software/v_envs/madpy3/bin/snakemake</span>
+<span class="n">deactivate</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="account">
+<h1><span class="section-number">3. </span>Account<a class="headerlink" href="#account" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The quota for storage are:</dt><dd><ul>
+<li><p>25GB in your home directory</p></li>
+<li><p>500GB in /zfs/omics/personal/$USER</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>The quota also apply to snapshots. Snapshots are made daily at 00.00.00 and kept for 2 weeks. This means that deleting files which are in a snapshot will not be available for another 2 weeks. It also means that if you accidentally remove a file it can be restored up to 2 weeks after removal.</p></li>
+<li><p>Data on Crunchomics is stored on multiple disks. Therefore, there is protection against disk failure. The data is not replicated. SILS users are encouraged to put their raw data on tape as soon as these are produced: <a class="reference external" href="http://sils-tape.science.uva.nl/requestform.php/">SILS tape archive</a>. Tape storage is duplicated.</p></li>
+<li><p>Help: <a class="reference external" href="mailto:w&#46;c&#46;deleeuw&#37;&#52;&#48;uva&#46;nl">w<span>&#46;</span>c<span>&#46;</span>deleeuw<span>&#64;</span>uva<span>&#46;</span>nl</a> / <a class="reference external" href="mailto:j&#46;rauwerda&#37;&#52;&#48;uva&#46;nl">j<span>&#46;</span>rauwerda<span>&#64;</span>uva<span>&#46;</span>nl</a></p></li>
+</ul>
+</div>
+<div class="section" id="the-crunchomics-application-server">
+<h1><span class="section-number">4. </span>The Crunchomics Application Server<a class="headerlink" href="#the-crunchomics-application-server" title="Permalink to this headline">¶</a></h1>
+<p>The address of the application server is <cite>omics-app01.science.uva.nl</cite> and you can log in to it in a similar fashion as you log in to the headnode. Your home and personal directory as well as other locations on the file system are also available on the application server.</p>
+<div class="section" id="clc-genomics-workbench">
+<h2><span class="section-number">4.1. </span>CLC Genomics Workbench<a class="headerlink" href="#clc-genomics-workbench" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>log in on the application server: address is <cite>omics-app01.science.uva.nl</cite> (<strong>not</strong> the headnode!!):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#in terminal type:</span>
+<span class="n">clcgenomicswb20</span>
+</pre></div>
+</div>
+</li>
+<li><dl>
+<dt>Remember, your home directory is 25G, so it is advisable to make your <strong>default location</strong> somewhere on /zfs/omics/personal/<em>uvanetid1</em>/</dt><dd><ul>
+<li><dl>
+<dt>add a new folder in CLC genomics workbench (e.g. <code class="docutils literal notranslate"><span class="pre">/zfs/omics/personal/*uvanetid1*/CLC_personal</span></code>)</dt><dd><div class="figure align-center">
+<a class="reference internal image-reference" href="_images/CLC-1.png"><img alt="_images/CLC-1.png" src="_images/CLC-1.png" style="width: 300px; height: 300px;" /></a>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>and make it the <em>default location</em></dt><dd><div class="figure align-center">
+<a class="reference internal image-reference" href="_images/CLC-2.png"><img alt="_images/CLC-2.png" src="_images/CLC-2.png" style="width: 300px; height: 450px;" /></a>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="start-rstudio">
+<h2><span class="section-number">4.2. </span>Start RStudio<a class="headerlink" href="#start-rstudio" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>We are currently setting up a log in to RStudio with your uvanetid via Surfconnect. This Surfconnect access is not available yet. Until then you can login directly on the application server.</dt><dd><ul>
+<li><p>Login to RStudio on the application server with your UvAnetid and password at: <cite>http://omics-app01.science.uva.nl:8787/</cite>. Don’t forget to include the port number (8787) in your url.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-crunchomics-compute-cluster">
+<h1><span class="section-number">5. </span>The Crunchomics Compute Cluster<a class="headerlink" href="#the-crunchomics-compute-cluster" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="interactive-access">
+<h2><span class="section-number">5.1. </span>Interactive access<a class="headerlink" href="#interactive-access" title="Permalink to this headline">¶</a></h2>
+<p>Interactive work on the head node <cite>omics-h0.science.uva.nl</cite> is possible but <strong>only for small computational tasks. All other jobs should be executed via the SLURM queue!!</strong>.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>You can run interactive jobs on the head node</dt><dd><ul>
+<li><p>small jobs</p></li>
+<li><p>parameterization of a big job, pilot jobs</p></li>
+<li><p>Only run jobs interactively when they take less than 12 hrs execution time on one cpu.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>If you have a job for which a really large amount of memory is needed, such as a genome assembly, you can use the app server that has 1TB memory installed.</dt><dd><ul>
+<li><p>Mark that the compute nodes have a 512 GB memory each, so many assembly jobs can better be put to the compute cluster.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="example-of-interactive-r-sessions">
+<h3><span class="section-number">5.1.1. </span>Example of Interactive R Sessions<a class="headerlink" href="#example-of-interactive-r-sessions" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>connect to the head node (with X), start R</p></li>
+<li><p>a simple example in the kick-off meeting (in R):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">&quot;Sine wave&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/slurm5.png"><img alt="_images/slurm5.png" src="_images/slurm5.png" style="width: 300px; height: 300px;" /></a>
+</div>
+<p>Another example:
+* a file is read (the result of a BLAST alignment) and the ratio of the query length and subject length are plotted, together with x=y:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xclock</span><span class="o">&amp;</span>
+<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">surfdrive</span><span class="o">.</span><span class="n">surf</span><span class="o">.</span><span class="n">nl</span><span class="o">/</span><span class="n">files</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">php</span><span class="o">/</span><span class="n">s</span><span class="o">/</span><span class="mi">9</span><span class="n">xIik2oVfjA8VVg</span><span class="o">/</span><span class="n">download</span> \
+<span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">document</span> <span class="n">blp</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Next, in R</p></li>
+</ul>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">blp</span><span class="o">&lt;-</span><span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;blp.txt&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">blp</span><span class="p">)</span>
+<span class="nf">x11</span><span class="p">(</span><span class="n">type</span><span class="o">=</span><span class="s">&quot;cairo&quot;</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="n">lbl</span><span class="o">&lt;-</span><span class="nf">paste</span><span class="p">(</span><span class="s">&quot;average ratio:&quot;</span><span class="p">,</span><span class="nf">round</span><span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">blp</span><span class="o">$</span><span class="n">qlen</span><span class="o">/</span><span class="n">blp</span><span class="o">$</span><span class="n">slen</span><span class="p">),</span><span class="m">2</span><span class="p">))</span>
+<span class="n">lbl</span>
+<span class="n">plot1</span><span class="o">&lt;-</span><span class="nf">ggplot</span><span class="p">(</span><span class="n">blp</span><span class="p">,</span><span class="nf">aes</span><span class="p">(</span><span class="n">qlen</span><span class="p">,</span><span class="n">slen</span><span class="p">,</span><span class="n">colour</span><span class="o">=</span><span class="nf">log</span><span class="p">(</span><span class="n">bitscore</span><span class="p">)))</span> <span class="o">+</span>
+<span class="c1">#scale_colour_gradientn(colours=rainbow(8)) +</span>
+<span class="nf">scale_colour_gradient</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="s">&quot;lightgreen&quot;</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="s">&quot;darkgreen&quot;</span><span class="p">)</span> <span class="o">+</span>
+<span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="m">18</span><span class="o">/</span><span class="m">20</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="m">20</span><span class="p">)</span> <span class="o">+</span>
+<span class="nf">coord_cartesian</span><span class="p">(</span><span class="n">ylim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1000</span><span class="p">),</span><span class="n">xlim</span> <span class="o">=</span>  <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1000</span><span class="p">))</span> <span class="o">+</span>
+<span class="nf">geom_abline</span><span class="p">(</span><span class="n">slope</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">intercept</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="m">0.8</span><span class="p">,</span> <span class="n">colour</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span> <span class="o">+</span>
+<span class="nf">labs</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;query length&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;subject length&quot;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Blast result predicted proteins on protein database&quot;</span><span class="p">)</span> <span class="o">+</span>
+<span class="nf">annotate</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">lbl</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="m">800</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
+<span class="n">plot1</span>
+<span class="c1">#png(&quot;/zfs/omics/personal/jrauwer1/Crunchomics_intro/plot_blast_qlen_slen.png&quot;,width=700, height=700, type=&quot;cairo&quot; )</span>
+<span class="c1">#plot1</span>
+<span class="c1">#dev.off()</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/plot_blast_qlen_slen.png"><img alt="_images/plot_blast_qlen_slen.png" src="_images/plot_blast_qlen_slen.png" style="width: 650px; height: 650px;" /></a>
+</div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1. Log in on the Head Node</a><ul>
+<li><a class="reference internal" href="#on-windows">1.1. On Windows</a><ul>
+<li><a class="reference internal" href="#login-without-a-password-with-rsa-keys">1.1.1. Login Without a Password with RSA Keys</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#on-linux-and-mac">1.2. On Linux and Mac</a><ul>
+<li><a class="reference internal" href="#id1">1.2.1. Login Without a Password with RSA Keys</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#preparing-your-account">2. Preparing Your Account</a><ul>
+<li><a class="reference internal" href="#getting-your-environment-ready">2.1. Getting Your Environment Ready</a><ul>
+<li><a class="reference internal" href="#diy">2.1.1. DIY</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#account">3. Account</a></li>
+<li><a class="reference internal" href="#the-crunchomics-application-server">4. The Crunchomics Application Server</a><ul>
+<li><a class="reference internal" href="#clc-genomics-workbench">4.1. CLC Genomics Workbench</a></li>
+<li><a class="reference internal" href="#start-rstudio">4.2. Start RStudio</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-crunchomics-compute-cluster">5. The Crunchomics Compute Cluster</a><ul>
+<li><a class="reference internal" href="#interactive-access">5.1. Interactive access</a><ul>
+<li><a class="reference internal" href="#example-of-interactive-r-sessions">5.1.1. Example of Interactive R Sessions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter"><em>The Crunchomics’ Documentation</em></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="miniconda.html"
+                        title="next chapter"><span class="section-number">6. </span>Miniconda</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/intro_crunchomics.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="miniconda.html" title="6. Miniconda"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="The Crunchomics’ Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Crunchomics 0.01 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>Log in on the Head Node</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Han Rauwerda Wim de Leeuw SILS-MAD-RB&amp;AB.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
