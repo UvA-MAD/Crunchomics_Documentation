@@ -11,7 +11,7 @@
 *Crunchomics: The Genomics Compute Environment for SILS and IBED*
 ====================================================================
 
-Cruchomics has 1 application server, a web server, a head node and 5 compute nodes. A storage system is mounted in which all users have a fast 25 GB SSD home directory and a 500 GB home directory. Volumes from the faculty server can be mounted on the system. 
+Cruchomics has 1 application server, a head node and 5 compute nodes. A storage system is mounted in which all users have a fast 25 GB SSD home directory and a 500 GB home directory. Volumes from the faculty server can be mounted on the system. 
 
 * CPU: AMD EPYC Rome 7302 32 cores, 64 threads, 3GHz
 * Compute cluster: 160 cores, 320 threads
@@ -19,7 +19,6 @@ Cruchomics has 1 application server, a web server, a head node and 5 compute nod
 * Local storage compute cluster: 8TB (SSD/NVMe): /scratch
    * /scratch is emptied after month of inactivity
 * Memory:
-   * Web server: 256 GB
    * Application server: 1024 GB 
    * Head node and compute nodes: 512 GB 
 * Storage: gross 504 TB operated in RAID-Z2: net approx. 220 TB.
