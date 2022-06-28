@@ -22,7 +22,7 @@ copyright = '2021, Han Rauwerda Wim de Leeuw SILS-MAD-RB&AB'
 author = 'Han Rauwerda Wim de Leeuw'
 
 # The full version, including alpha/beta/rc tags
-release = '0.01'
+release = '0.02'
 
 
 # -- General configuration ---------------------------------------------------
@@ -30,8 +30,7 @@ release = '0.01'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
-]
+extensions = []
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
