@@ -26,7 +26,7 @@ Cruchomics has 1 application server, a head node and 5 compute nodes. A storage 
    * Snapshots taken: some protection against unintentional file deletions
    * No backups made!
 * File systems are mounted on all nodes.
-* OS: CentOS 7
+* OS: AlmaLinux 8.9
 * Help: w.c.deleeuw@uva.nl 
 
 .. figure:: img/architecture.PNG 
