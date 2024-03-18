@@ -7,7 +7,6 @@
 *The Crunchomics’ Documentation*
 ++++++++++++++++++++++++++++++++++++++++
 
-
 *Crunchomics: The Genomics Compute Environment for SILS and IBED*
 ====================================================================
 
@@ -55,9 +54,5 @@ Indices and tables
 
 * :ref:`genindex`
 * :ref:`search`
-
-
-
-
 
 

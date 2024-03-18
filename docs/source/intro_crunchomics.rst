@@ -141,6 +141,9 @@ The address of the application server is `omics-app01.science.uva.nl` and you ca
 CLC Genomics Workbench
 **********************
 
+
+CLC genomics is available for groups sharing in the cost for the licence.  f you want to use CLC Genomics Workbench on the Omics-cluster contact s.m.vanleeuwen@uva.nl.  
+
 *  log in on the application server: address is `omics-app01.science.uva.nl` (**not** the headnode!!)::
 
 	#in terminal type:
