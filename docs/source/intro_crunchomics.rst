@@ -99,6 +99,8 @@ A script to do the things mentioned above for you is here, type on your head nod
 
 This script will change the .bashrc and .bash_profile files such that the requirements mentioned above are fullfilled. 
 
+
+
 DIY
 ===
 
@@ -163,12 +165,12 @@ CLC genomics is available for groups sharing in the cost for the licence.  f you
 		:height: 450px 
 
 
-Start RStudio
+RStudio
 *************
 
-*   Eventually, authentication to RStudio will be via Surfconnect. However, this Surfconnect access is not available yet. Until then you can login directly on the application server:  
+RStudio is running on the application server. To access it log in with your UvAnetid and password at: `https://omics-app01.science.uva.nl/`.  Via R studio you have access to the same version of R, collecition of R packages, and storage as the default command line R version on the cluster.
 
-    *  Login to RStudio on the application server with your UvAnetid and password at: `http://omics-app01.science.uva.nl/`. 
+If you  use RStudio regularly with large data the caching of rstudio in combination with snapshots might fill up your home directory. Moving the rstudio chache to the personal share can be done with the `/zfs/omics/software/script/omics_mv_rstudio_cache` script. Before running the script stop the R-studio session you might have running using `Quit session` in the `file` menu.
 
 The Crunchomics Compute Cluster
 ##########################################
@@ -181,7 +183,7 @@ Interactive work on the head node `omics-h0.science.uva.nl` is possible but **on
 * You can run interactive jobs on the head node
    * small jobs
    * parameterization of a big job, pilot jobs
-   * Only run jobs interactively when they take less than 12 hrs execution time on one cpu.
+   * Only run jobs interactively when they take less than 12 hrs execution time on a single cpu.
 * If you have a job for which a really large amount of memory is needed, such as a genome assembly, you can use the app server that has 1TB memory installed.
    * Mark that the compute nodes have a 512 GB memory each, so many assembly jobs can better be put to the compute cluster. 
       
